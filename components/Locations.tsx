@@ -13,9 +13,11 @@ export default function Locations() {
 
               <a
                 href={location.map}
+                target='_blank'
+                rel='noopener noreferrer'
                 className='text-green-600 text-sm mt-3 inline-block'
               >
-                Get Directions on Google Maps
+                Get Directions! Open in Google Maps
               </a>
 
               <p className='mt-3'>{location.address}</p>

@@ -24,12 +24,12 @@ export const businessInfo = {
     {
       name: 'Barima Rentals Kitty Location',
       address: '6 "D" Station Street Kitty, Georgetown',
-      map: '...',
+      map: 'https://www.google.com/maps/dir/?api=1&destination=6.81642025235863, -58.14491838546573',
     },
     {
       name: 'Barima Rentals East Coast Location',
-      address: 'Lot A Rupert Craig Highway, East Coast Demerara',
-      map: '...',
+      address: 'Lot A Rupert Craig Highway, Liliendaal, East Coast Demerara',
+      map: 'https://www.google.com/maps/dir/?api=1&destination=6.8258311871954245, -58.120385973902934',
     },
   ],
   locationName: 'In and around Georgetown',
