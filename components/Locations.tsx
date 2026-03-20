@@ -11,16 +11,34 @@ export default function Locations() {
             <div key={index} className='bg-white p-6 rounded-xl shadow'>
               <h3 className='font-semibold text-lg'>{location.name}</h3>
 
-              <a
-                href={location.map}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-green-600 text-sm mt-3 inline-block'
-              >
-                Get Directions! Open in Google Maps
-              </a>
-
               <p className='mt-3'>{location.address}</p>
+
+              <div className='mt-4 flex flex-col gap-2'>
+                <a
+                  href={location.map}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='bg-gray-100 px-3 py-2 rounded text-sm hover:bg-gray-200'
+                >
+                  📍 Get Directions
+                </a>
+
+                <a
+                  href={`tel:${businessInfo.phone}`}
+                  className='bg-gray-100 px-3 py-2 rounded text-sm hover:bg-gray-200'
+                >
+                  📞 Call Now
+                </a>
+
+                <a
+                  href={`https://wa.me/${businessInfo.whatsappNumber}?text=${encodeURIComponent(businessInfo.whatsappMessage)}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='bg-green-500 text-white px-3 py-2 rounded text-sm hover:bg-green-600'
+                >
+                  💬 WhatsApp
+                </a>
+              </div>
             </div>
           ))}
         </div>

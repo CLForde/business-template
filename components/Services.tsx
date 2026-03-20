@@ -30,7 +30,7 @@ function ServiceCard({ service, isInView, index }: any) {
         transitionDelay: `${index * 150}ms`,
       }}
     >
-      <div className='relative h-[260px] md:h-[300px] mb-4 overflow-hidden rounded-lg bg-white'>
+      <div className='relative h-[250px] mb-4 overflow-hidden rounded-lg bg-gray-100'>
         {service.images.map((img: string, i: number) => (
           <img
             key={i}

@@ -1,6 +1,6 @@
 export const businessInfo = {
   // Identity
-  name: 'Barima Venture',
+  name: 'Barima Rentals',
   tagline: 'Reliable Equipment & Services for Your Projects',
   description:
     'We provide quality equipment rentals and services for contractors, homeowners and businesses. Our reliable solutions help you get the job done efficiently.',
