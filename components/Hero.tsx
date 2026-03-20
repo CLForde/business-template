@@ -1,6 +1,4 @@
-import { businessInfo } from '@/data/businessInfo';
-
-export default function Hero() {
+export default function Hero({ businessInfo }: any) {
   return (
     <section className='relative h-[420px] flex items-center justify-center text-white'>
       <img

@@ -1,6 +1,4 @@
-import { businessInfo } from '@/data/businessInfo';
-
-export default function WhyChooseUs() {
+export default function WhyChooseUs({ businessInfo }: any) {
   return (
     <section className='bg-white py-16'>
       <div className='max-w-4xl mx-auto text-center px-6'>

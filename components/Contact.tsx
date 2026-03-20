@@ -1,6 +1,4 @@
-import { businessInfo } from '@/data/businessInfo';
-
-export default function Contact() {
+export default function Contact({ businessInfo }: any) {
   return (
     <section id='contact' className='py-20 text-center'>
       <h2 className='text-3xl font-bold'>

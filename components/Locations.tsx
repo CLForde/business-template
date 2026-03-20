@@ -1,6 +1,4 @@
-import { businessInfo } from '@/data/businessInfo';
-
-export default function Locations() {
+export default function Locations({ businessInfo }: any) {
   return (
     <section id='locations' className='bg-gray-100 py-16'>
       <div className='max-w-5xl mx-auto px-6 text-center'>

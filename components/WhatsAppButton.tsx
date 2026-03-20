@@ -1,6 +1,4 @@
-import { businessInfo } from '@/data/businessInfo';
-
-export default function WhatsAppButton() {
+export default function WhatsAppButton({ businessInfo }: any) {
   return (
     <a
       href={`https://wa.me/${businessInfo.whatsappNumber}?text=${encodeURIComponent(

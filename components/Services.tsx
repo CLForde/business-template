@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { businessInfo } from '@/data/businessInfo';
 import { useInView } from './useInView';
 
 function ServiceCard({ service, isInView, index }: any) {
@@ -49,7 +48,7 @@ function ServiceCard({ service, isInView, index }: any) {
   );
 }
 
-export default function Services() {
+export default function Services({ businessInfo }: any) {
   const { ref, isInView } = useInView();
   return (
     <section ref={ref} id='services' className='max-w-6xl mx-auto py-16 px-6'>

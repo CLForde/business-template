@@ -1,6 +1,4 @@
-import { businessInfo } from '@/data/businessInfo';
-
-export default function Footer() {
+export default function Footer({ businessInfo }: any) {
   return (
     <footer className='bg-gray-900 text-white py-8 text-center'>
       <p className='font-semibold text-lg'>{businessInfo.name}</p>

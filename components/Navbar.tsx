@@ -1,6 +1,4 @@
-import { businessInfo } from '@/data/businessInfo';
-
-export default function Navbar() {
+export default function Navbar({ businessInfo }: any) {
   return (
     <div className='bg-gray-900 text-white sticky top-0 z-50'>
       <div className='max-w-6xl mx-auto px-4 py-3 flex justify-between items-center'>
