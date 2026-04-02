@@ -1,15 +1,4 @@
-type Location = {
-  name: string;
-  address: string;
-  map: string;
-};
-
-type BusinessInfo = {
-  addresses: Location[];
-  phone: string;
-  whatsappNumber: string;
-  whatsappMessage: string;
-};
+import { BusinessInfo, Location } from '@/lib/types';
 
 export default function Locations({
   businessInfo,

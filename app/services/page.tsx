@@ -42,9 +42,7 @@ export default async function ServicesPage() {
       {services.map((service) => (
         <div key={service.id} style={{ marginBottom: '20px' }}>
           <Link href={`/${service.slug}`}>
-            <h2 style={{ color: 'blue', cursor: 'pointer' }}>
-              {service.title}
-            </h2>
+            <h2 style={{ color: 'blue', cursor: 'pointer' }}>{service.name}</h2>
           </Link>
 
           <p>{service.description}</p>

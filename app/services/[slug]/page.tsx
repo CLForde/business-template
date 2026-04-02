@@ -38,7 +38,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <div>
-      <h1>{service.title}</h1>
+      <h1>{service.name}</h1>
       <p>{service.description}</p>
     </div>
   );

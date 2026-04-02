@@ -1,31 +1,23 @@
-export default function Hero({ businessInfo }: any) {
+import { BusinessInfo, Service } from '@/lib/types';
+
+export default function Services({
+  businessInfo,
+}: {
+  businessInfo: BusinessInfo;
+}) {
   return (
-    <section className='relative h-[420px] flex items-center justify-center text-white'>
-      <img
-        src={businessInfo.hero.image}
-        alt={businessInfo.name}
-        className='absolute w-full h-full object-cover'
-      />
+    <section className='bg-white py-16'>
+      <div className='max-w-6xl mx-auto px-6 text-center'>
+        <h2 className='text-3xl font-bold mb-10'>Our Services</h2>
 
-      <div className='absolute inset-0 bg-black/60'></div>
-
-      <div className='relative z-10 text-center px-6'>
-        <h1 className='text-4xl md:text-5xl font-bold'>
-          {businessInfo.hero.title}
-        </h1>
-
-        <p className='mt-4 text-lg max-w-xl mx-auto'>
-          {businessInfo.hero.subtitle}
-        </p>
-
-        <a
-          href={`https://wa.me/${businessInfo.whatsappNumber}?text=${encodeURIComponent(
-            businessInfo.whatsappMessage,
-          )}`}
-          className='inline-block mt-8 bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600'
-        >
-          {businessInfo.hero.buttonText}
-        </a>
+        <div className='grid md:grid-cols-3 gap-8'>
+          {businessInfo.services.map((service: Service, index: number) => (
+            <div key={index} className='bg-gray-100 p-6 rounded-xl shadow'>
+              <h3 className='text-xl font-semibold mb-3'>{service.name}</h3>
+              <p>{service.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
