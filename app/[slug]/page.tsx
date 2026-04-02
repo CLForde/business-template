@@ -1,22 +1,19 @@
 import { supabase } from '@/lib/supabase';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
+import { getSubdomain } from '@/lib/getSubdomain';
 
-type PageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
+type Props = {
+  params: { slug: string };
 };
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: Props) {
   const headersList = await headers();
   const host = headersList.get('host');
 
-  const subdomain = host?.includes('localhost')
-    ? 'barima'
-    : host?.split('.')[0];
+  const subdomain = getSubdomain(host); // remove port
 
-  const { slug } = await params;
+  const { slug } = params;
 
   // ✅ Get site
   const { data: site, error: siteError } = await supabase
