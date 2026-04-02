@@ -3,15 +3,18 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { getSubdomain } from '@/lib/getSubdomain';
 
-export default async function Page({ params }: PageProps) {
+type Props = {
+  params: { slug: string };
+};
+
+export default async function Page({ params }: Props) {
   const headersList = await headers();
-  const host = headersList.get('host');
+  const host = headersList.get('host') || '';
 
-  const subdomain = getSubdomain(host); // remove port
+  const subdomain = getSubdomain(host);
 
-  const { slug } = await params;
+  const { slug } = params;
 
-  // ✅ Get site
   const { data: site, error: siteError } = await supabase
     .from('sites')
     .select('*')
@@ -22,7 +25,6 @@ export default async function Page({ params }: PageProps) {
     notFound();
   }
 
-  // ✅ Get service (secure)
   const { data: service, error: serviceError } = await supabase
     .from('services')
     .select('*')
@@ -36,9 +38,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div>
-      <h1>Service Page</h1>
-      <p>Site: {site.name}</p>
-      <h2>{service.title}</h2>
+      <h1>{service.title}</h1>
       <p>{service.description}</p>
     </div>
   );
