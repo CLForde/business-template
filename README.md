@@ -30,3 +30,19 @@ return yourFileName;
 6. Visit your site:
 
 /your-business-name
+
+## Environment Variables (Optional)
+
+This project currently does NOT require any environment variables.
+
+If you later add features like:
+
+- Contact forms
+- Payments
+- Authentication
+
+You may need to create a `.env.local` file.
+
+Example:
+
+NEXT_PUBLIC_API_URL=your_api_url_here

@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Barima Venture",
+    "tagline": "Reliability",
+    "phone": "6275775",
+    "whatsapp": "",
+    "address": "",
+    "map": "",
+    "description": "",
+    "heroImage": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774781441/nvsximoekcivvaj1kzwz.jpg",
+    "services": [
+      {
+        "name": "Scaffold",
+        "image": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774781430/hamiycrpjnbd8nvwzk6c.jpg"
+      }
+    ],
+    "service1Image": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774781463/r8cuh6qv7to5t5zi6h62.jpg",
+    "service2Image": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774781477/pgcxmcfddp6opgvjd01p.jpg",
+    "slug": "barima-venture"
+  },
+  {
+    "name": "CF Rentals",
+    "tagline": "",
+    "phone": "",
+    "whatsapp": "",
+    "address": "",
+    "map": "",
+    "description": "",
+    "heroImage": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1775012742/eph1qyohka7e61e55ixx.jpg",
+    "services": [
+      {
+        "name": "scaffold rental",
+        "image": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1775012732/zw8lnjhsknhtt2ohwt0m.jpg"
+      }
+    ],
+    "slug": "cf-rentals"
+  },
+  {
+    "name": "Cleveland Forde",
+    "tagline": "Athlete/Coach",
+    "phone": "6275775",
+    "whatsapp": "",
+    "address": "",
+    "map": "",
+    "description": "",
+    "heroImage": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774236233/upzgelbyz0oq5oolsjke.jpg",
+    "service1Image": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774236247/jridbp1phs9zajatz5cn.jpg",
+    "service2Image": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774236340/zzhqs34l2fc6fxlwcl5u.jpg",
+    "service1": "Flexibility",
+    "service2": "Strength",
+    "service3": "",
+    "slug": "cleveland-forde"
+  },
+  {
+    "name": "John",
+    "tagline": "",
+    "phone": "",
+    "whatsapp": "",
+    "address": "",
+    "map": "",
+    "description": "",
+    "heroImage": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774922136/bdzujwv0bwogjtmeaeso.jpg",
+    "services": [
+      {
+        "name": "Scaffolding REntal",
+        "image": "https://res.cloudinary.com/dqkdkepbi/image/upload/v1774922110/k9mk2ug3h5m3cw8zyqll.jpg"
+      }
+    ],
+    "slug": "john"
+  }
+]

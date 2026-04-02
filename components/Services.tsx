@@ -30,16 +30,13 @@ function ServiceCard({ service, isInView, index }: any) {
       }}
     >
       <div className='relative h-[250px] mb-4 overflow-hidden rounded-lg bg-gray-100'>
-        {service.images.map((img: string, i: number) => (
+        {service.images?.[0] && (
           <img
-            key={i}
-            src={img}
+            src={service.images[0]}
             alt={service.name}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-              i === imageIndex ? 'opacity-100' : 'opacity-0'
-            }`}
+            className='w-full h-[250px] object-cover rounded-lg'
           />
-        ))}
+        )}
       </div>
 
       <h3 className='font-semibold'>{service.name}</h3>
