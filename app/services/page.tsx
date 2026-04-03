@@ -1,13 +1,19 @@
 import { supabase } from '@/lib/supabase';
 import { headers } from 'next/headers';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getSubdomain } from '@/lib/getSubdomain';
 
 export default async function ServicesPage() {
   const headersList = await headers();
-  const host = headersList.get('host');
+  const host = headersList.get('host') || '';
   const subdomain = getSubdomain(host);
+
+  // ✅ FIX: if NO subdomain → go to preview
+  if (!subdomain || subdomain === 'www') {
+    redirect('/preview');
+  }
+
   // ✅ 1. Get site
   const { data: site, error: siteError } = await supabase
     .from('sites')
@@ -26,10 +32,9 @@ export default async function ServicesPage() {
     .eq('site_id', site.id);
 
   if (error) {
-    notFound(); // or you could show a nicer fallback later
+    notFound();
   }
 
-  // ✅ Optional: empty state
   if (!services || services.length === 0) {
     return <div>No services available</div>;
   }
@@ -41,7 +46,7 @@ export default async function ServicesPage() {
 
       {services.map((service) => (
         <div key={service.id} style={{ marginBottom: '20px' }}>
-          <Link href={`/${service.slug}`}>
+          <Link href={`/site/${service.slug}`}>
             <h2 style={{ color: 'blue', cursor: 'pointer' }}>{service.name}</h2>
           </Link>
 
