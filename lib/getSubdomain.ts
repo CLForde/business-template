@@ -1,16 +1,23 @@
-export function getSubdomain(host: string | null) {
+const ROOT_DOMAINS = ['vercel.app'];
+
+export function getSubdomain(host: string | null): string | null {
   if (!host) return null;
 
-  const parts = host.split('.');
+  const hostname = host.split(':')[0];
+  const parts = hostname.split('.');
 
-  // localhost case
-  if (host.includes('localhost')) {
-    return parts[0] === 'localhost' ? null : parts[0];
-  }
+  if (hostname === 'localhost') return null;
 
-  // vercel domain case
-  if (parts.length > 2) {
-    return parts[0];
+  for (const root of ROOT_DOMAINS) {
+    if (hostname.endsWith(root)) {
+      const subParts = parts.slice(0, parts.length - root.split('.').length);
+      // e.g. myshop.business-template-qekt.vercel.app → subParts = ['myshop', 'business-template-qekt']
+      // We only want a real user subdomain, not the base project name
+      if (subParts.length === 1) {
+        return subParts[0];
+      }
+      return null; // root project domain, no subdomain
+    }
   }
 
   return null;
