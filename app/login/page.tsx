@@ -4,23 +4,13 @@ import Image from 'next/image';
 
 export default function LoginPage() {
   const handleGoogleLogin = async () => {
-    const redirectTo = `https://business-template-qekt.vercel.app/auth/confirm`;
-
-    const { error } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo,
-        queryParams: {
-          access_type: 'offline',
-          prompt: 'consent',
-        },
+        redirectTo: `https://business-template-qekt.vercel.app/auth/confirm`,
+        skipBrowserRedirect: false,
       },
     });
-
-    if (error) {
-      console.error('OAuth error:', error.message);
-      alert('Login failed: ' + error.message);
-    }
   };
 
   return (
