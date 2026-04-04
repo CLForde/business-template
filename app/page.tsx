@@ -61,7 +61,7 @@ export default async function HomePage() {
         .nav-links a:hover { color: var(--orange); }
         .nav-cta { background: var(--orange); color: white; padding: 9px 20px; border-radius: 7px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; cursor: pointer; text-decoration: none; }
         .hero { min-height: 100vh; position: relative; display: flex; align-items: center; padding: 100px 6% 80px; overflow: hidden; }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.90) 35%, rgba(255,255,255,0.65) 60%, rgba(255,255,255,0.15) 100%); z-index: 1; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0.40) 60%, rgba(255,255,255,0.05) 100%); z-index: 1; }
         .hero-content { position: relative; z-index: 2; max-width: 580px; }
         .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--green-light); border: 1px solid rgba(91,166,20,0.25); border-radius: 20px; padding: 5px 14px; margin-bottom: 24px; }
         .hero-badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
