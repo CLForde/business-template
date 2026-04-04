@@ -4,9 +4,7 @@ import Image from 'next/image';
 
 export default function LoginPage() {
   const handleGoogleLogin = async () => {
-    const redirectTo = process.env.NEXT_PUBLIC_SITE_URL
-      ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
-      : `${window.location.origin}/auth/callback`;
+    const redirectTo = `https://business-template-qekt.vercel.app/auth/confirm`;
 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
