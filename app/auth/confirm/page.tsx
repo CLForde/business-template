@@ -10,70 +10,63 @@ export default function AuthConfirm() {
   useEffect(() => {
     const handleAuth = async () => {
       try {
-        // First check if we already have a session
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-        if (session) {
-          setStatus('Redirecting to dashboard...');
-          router.push('/dashboard');
-          return;
-        }
-
-        // Check URL hash for tokens (implicit flow)
         const hash = window.location.hash;
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Try hash tokens first (implicit flow)
         if (hash && hash.includes('access_token')) {
           const params = new URLSearchParams(hash.substring(1));
           const access_token = params.get('access_token');
           const refresh_token = params.get('refresh_token');
-          if (access_token && refresh_token) {
-            setStatus('Setting up your session...');
-            const { error } = await supabase.auth.setSession({
+
+          if (access_token) {
+            setStatus('Setting session...');
+            const { data, error } = await supabase.auth.setSession({
               access_token,
-              refresh_token,
+              refresh_token: refresh_token || '',
             });
-            if (!error) {
-              setStatus('Redirecting to dashboard...');
-              router.push('/dashboard');
+            if (data.session) {
+              setStatus('Success! Redirecting...');
+              window.location.href = '/dashboard';
               return;
             }
-            setStatus('Session error: ' + error.message);
+            if (error) setStatus('Error: ' + error.message);
           }
         }
 
-        // Check URL params for code (PKCE flow)
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('code');
+        // Try PKCE code
+        const code = urlParams.get('code');
         if (code) {
           setStatus('Exchanging code...');
-          const { error } = await supabase.auth.exchangeCodeForSession(code);
-          if (!error) {
-            setStatus('Redirecting to dashboard...');
-            router.push('/dashboard');
+          const { data, error } =
+            await supabase.auth.exchangeCodeForSession(code);
+          if (data.session) {
+            setStatus('Success! Redirecting...');
+            window.location.href = '/dashboard';
             return;
           }
-          setStatus('Code exchange error: ' + error.message);
+          if (error) setStatus('Code error: ' + error.message);
         }
 
-        // Listen for auth state change
-        setStatus('Waiting for auth...');
+        // Check existing session
         const {
-          data: { subscription },
-        } = supabase.auth.onAuthStateChange(async (event, session) => {
-          if (event === 'SIGNED_IN' && session) {
-            setStatus('Redirecting to dashboard...');
-            subscription.unsubscribe();
-            router.push('/dashboard');
-          }
-        });
+          data: { session },
+        } = await supabase.auth.getSession();
+        if (session) {
+          setStatus('Session found! Redirecting...');
+          window.location.href = '/dashboard';
+          return;
+        }
 
-        // Timeout fallback
+        setStatus('No session found. Redirecting to login...');
         setTimeout(() => {
-          router.push('/login');
-        }, 8000);
+          window.location.href = '/login';
+        }, 2000);
       } catch (err) {
-        setStatus('Error: ' + String(err));
-        setTimeout(() => router.push('/login'), 3000);
+        setStatus('Unexpected error: ' + String(err));
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 3000);
       }
     };
 

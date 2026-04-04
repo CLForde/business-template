@@ -1,13 +1,19 @@
-import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  // Never block the auth callback
+  // Never block auth routes
   if (request.nextUrl.pathname.startsWith('/auth')) {
     return NextResponse.next();
   }
 
-  let supabaseResponse = NextResponse.next({ request });
+  // Never block login
+  if (request.nextUrl.pathname.startsWith('/login')) {
+    return NextResponse.next();
+  }
+
+  const { createServerClient } = await import('@supabase/ssr');
+  const { cookies } = await import('next/headers');
+  const cookieStore = await cookies();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -15,15 +21,11 @@ export async function middleware(request: NextRequest) {
     {
       cookies: {
         getAll() {
-          return request.cookies.getAll();
+          return cookieStore.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value),
-          );
-          supabaseResponse = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options),
+            cookieStore.set(name, value, options),
           );
         },
       },
@@ -34,17 +36,13 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (
-    !user &&
-    (request.nextUrl.pathname.startsWith('/dashboard') ||
-      request.nextUrl.pathname.startsWith('/create'))
-  ) {
+  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  return supabaseResponse;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/create/:path*', '/auth/:path*'],
+  matcher: ['/dashboard/:path*', '/create/:path*'],
 };
