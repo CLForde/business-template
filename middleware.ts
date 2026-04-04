@@ -29,7 +29,6 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Protect dashboard and create routes
   if (
     !user &&
     (request.nextUrl.pathname.startsWith('/dashboard') ||
