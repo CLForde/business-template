@@ -1,13 +1,14 @@
 'use client';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-browser';
 import Image from 'next/image';
 
 export default function LoginPage() {
+  const supabase = createClient();
   const handleGoogleLogin = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `https://business-template-qekt.vercel.app/auth/confirm`,
+        redirectTo: `${location.origin}/auth/confirm`,
         skipBrowserRedirect: false,
       },
     });
