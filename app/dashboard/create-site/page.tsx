@@ -4,24 +4,21 @@ import { useState } from 'react';
 import { createClient } from '@/lib/supabase-browser';
 import { useRouter } from 'next/navigation';
 
-export default function CreateSite() {
-  const supabase = createClient(); // ✅ correct client
-  const router = useRouter(); // ✅ router fixed
+export default function CreateSitePage() {
+  const supabase = createClient();
+  const router = useRouter();
 
+  // ✅ DEFINE STATES (this fixes your errors)
   const [name, setName] = useState('');
   const [subdomain, setSubdomain] = useState('');
-  const [description, setDescription] = useState(''); // ✅ FIXED
-  const [loading, setLoading] = useState(false);
+  const [description, setDescription] = useState('');
 
   const handleCreate = async () => {
-    setLoading(true);
-
     const { data, error: userError } = await supabase.auth.getUser();
     const user = data?.user;
 
     if (userError || !user) {
       alert('User not authenticated');
-      setLoading(false);
       return;
     }
 
@@ -35,14 +32,11 @@ export default function CreateSite() {
     ]);
 
     if (error) {
-      console.log('FULL ERROR:', error);
-      console.log('DETAILS:', JSON.stringify(error, null, 2));
+      console.log(error); // 👈 IMPORTANT
       alert(error.message);
     } else {
       router.push('/dashboard');
     }
-
-    setLoading(false);
   };
 
   return (
@@ -50,7 +44,7 @@ export default function CreateSite() {
       <h1>Create Your Site</h1>
 
       <input
-        placeholder='Site Name'
+        placeholder='Business Name'
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
@@ -59,7 +53,7 @@ export default function CreateSite() {
       <br />
 
       <input
-        placeholder='Subdomain (e.g. john)'
+        placeholder='Subdomain (e.g. barima)'
         value={subdomain}
         onChange={(e) => setSubdomain(e.target.value)}
       />
@@ -76,9 +70,7 @@ export default function CreateSite() {
       <br />
       <br />
 
-      <button onClick={handleCreate} disabled={loading}>
-        {loading ? 'Creating...' : 'Create Site'}
-      </button>
+      <button onClick={handleCreate}>Create Site</button>
     </div>
   );
 }

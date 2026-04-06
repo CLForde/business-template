@@ -1,19 +1,11 @@
-export function getSubdomain(host: string | null): string | null {
+export function getSubdomain(host: string | null) {
   if (!host) return null;
 
-  const hostname = host.split(':')[0].toLowerCase();
-
-  // Never treat these as subdomains
-  const rootHostnames = ['localhost', 'business-template-qekt.vercel.app'];
-
-  if (rootHostnames.includes(hostname)) return null;
-
-  // Must be something like: mysite.business-template-qekt.vercel.app
-  const suffix = '.business-template-qekt.vercel.app';
-  if (hostname.endsWith(suffix)) {
-    const sub = hostname.replace(suffix, '');
-    if (sub && !sub.includes('.')) return sub;
+  // localhost:3000 → site/barima-sands handled differently
+  if (host.includes('localhost')) {
+    return null;
   }
 
-  return null;
+  const parts = host.split('.');
+  return parts.length > 2 ? parts[0] : null;
 }
